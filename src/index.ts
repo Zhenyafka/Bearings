@@ -2,7 +2,6 @@ import express from 'express';
 import https from 'https';
 import fs from 'fs';
 import path from 'path';
-import bodyParser from 'body-parser';
 import bearingsRoutes from './routes/bearingsRoutes';
 import authRoutes from './routes/authRoutes';
 
