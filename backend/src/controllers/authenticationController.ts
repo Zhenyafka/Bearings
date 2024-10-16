@@ -1,14 +1,11 @@
 import {Request, Response} from "express";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import users from "../models/user";
 
 
 const SECRET_KEY = 'your_secret_key';
 
-const users = [
-    { id: 1, username: 'admin', passwordHash: bcrypt.hashSync('adminpass', 10) },
-    { id: 2, username: 'user', passwordHash: bcrypt.hashSync('userpass', 10) }
-];
 
 export async function login(req: Request, res: Response) {
     const { username, password } = req.body;

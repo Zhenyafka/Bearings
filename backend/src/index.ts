@@ -3,7 +3,8 @@ import https from 'https';
 import fs from 'fs';
 import path from 'path';
 import bearingsRoutes from './routes/bearingsRoutes';
-import authRoutes from './routes/authRoutes';
+import authRoutes from './routes/authenticationRoutes';
+import registerRoutes from './routes/registrationRoutes';
 
 
 
@@ -16,7 +17,8 @@ const credentials: { key: string; cert: string; } = { key: privateKey, cert: cer
 
 
 app.use(express.json());
-app.use('/auth', authRoutes);
+app.use('/', registerRoutes);
+app.use('/login', authRoutes);
 app.use('/api', bearingsRoutes);
 
 
