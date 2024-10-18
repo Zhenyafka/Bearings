@@ -7,7 +7,7 @@ import users from "../models/user";
 const SECRET_KEY = 'your_secret_key';
 
 
-export async function login(req: Request, res: Response) {
+export async function auth(req: Request, res: Response) {
     const { username, password } = req.body;
     const user = users.find(u => u.username === username);
     if (!user) {
