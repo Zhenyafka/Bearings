@@ -3,15 +3,16 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import {pool} from "../components/db";
 
-const JWT_SECRET = 'your_jwt_secret_key';
+export const JWT_SECRET = 'your_jwt_secret_key';
 export async function login(req: Request, res: Response) {
     //1. Get login and password from the request body
     const { username, password } = req.body;
 
     //2. Check if the user exists in the database
     try {
+
         const userQuery = `
-            SELECT a.account_id, a.username, a.email, p.password_hash 
+            SELECT a.account_id, a.username, a.email, p.password_hash, r.role_name 
             FROM accounts a 
             JOIN passwords p ON a.account_id = p.account_id
             JOIN roles r ON a.role_id = r.role_id
@@ -33,7 +34,7 @@ export async function login(req: Request, res: Response) {
 
         //4. Create a JWT token
         const token = jwt.sign(
-            { account_id: user.account_id, username: user.username, role: user.role },
+            { account_id: user.account_id, username: user.username, Role: user.role },
             JWT_SECRET,
             { expiresIn: '1h' }
         );

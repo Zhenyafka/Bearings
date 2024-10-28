@@ -5,9 +5,11 @@ interface User {
     password: string;
     role?: Role;
 }
+
+
 export enum Role {
-    ADMIN = 'admin',
-    USER = 'user',
+    Admin = 'admin',
+    User = 'user'
 }
 
 const users: User[] = [];

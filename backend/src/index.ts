@@ -7,6 +7,7 @@ import authRoutes from './routes/authenticationRoutes';
 import registerRoutes from './routes/registrationRoutes';
 import loginRoutes from './routes/authorizationRoutes';
 import {authenticateJWT} from "./middleware/authMiddleware";
+import {Role} from "./models/user";
 
 
 const app = express();
@@ -21,7 +22,7 @@ app.use(express.json());
 app.use('/', registerRoutes);
 app.use('/auth', authRoutes);
 app.use('/login', loginRoutes);
-app.use('/api', authenticateJWT('admin'),bearingsRoutes);
+app.use('/api', authenticateJWT(Role.Admin),bearingsRoutes);
 
 
 const httpsServer = https.createServer(credentials, app);
