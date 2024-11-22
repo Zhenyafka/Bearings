@@ -3,8 +3,11 @@ import https from 'https';
 import fs from 'fs';
 import path from 'path';
 import bearingsRoutes from './routes/bearingsRoutes';
-import authRoutes from './routes/authRoutes';
-
+import authRoutes from './routes/authenticationRoutes';
+import registerRoutes from './routes/registrationRoutes';
+import loginRoutes from './routes/authorizationRoutes';
+import {authenticateJWT} from "./middleware/authMiddleware";
+import {Role} from "./models/user";
 
 
 const app = express();
@@ -16,8 +19,10 @@ const credentials: { key: string; cert: string; } = { key: privateKey, cert: cer
 
 
 app.use(express.json());
+app.use('/', registerRoutes);
 app.use('/auth', authRoutes);
-app.use('/api', bearingsRoutes);
+app.use('/login', loginRoutes);
+app.use('/api', authenticateJWT(Role.Admin),bearingsRoutes);
 
 
 const httpsServer = https.createServer(credentials, app);

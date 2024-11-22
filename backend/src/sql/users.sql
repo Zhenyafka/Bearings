@@ -1,3 +1,11 @@
+
+CREATE TABLE roles (
+   role_id SERIAL PRIMARY KEY,
+   role_name VARCHAR(50) UNIQUE NOT NULL
+);
+
+INSERT INTO roles (role_name) VALUES ('admin'), ('user');
+
 CREATE TABLE accounts (
    account_id SERIAL PRIMARY KEY,
    username VARCHAR(255) NOT NULL UNIQUE,
@@ -20,7 +28,3 @@ CREATE TABLE passwords (
     PRIMARY KEY (account_id)
 );
 
-CREATE TABLE roles (
-                       role_id SERIAL PRIMARY KEY,
-                       role_name VARCHAR(50) UNIQUE NOT NULL
-);
